@@ -1,276 +1,127 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
-    <title>Coevaluación 3 - Cálculo del IMC</title> 
-    <style>
-        :root{
-            --azulClaro: rgb(188,248,255);
-            --azulMedio: rgb(28,192,230);
-            --azulOscuro: rgb(0,82,155);
-            --clarito: rgb(255,255,255);
-            --oscuro: rgb(46,75,89);
-            --fuente-h1: 4rem;
-            --fuente-principal: 1.65rem;
-            --fuente-secundaria: 1.35rem;
-        }
-        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-            color: black;
-            opacity: 0.35; /* Firefox */
-        }
-        html {
-            font-size: 62.5%;
-            box-sizing: border-box;
-            background-color: var(--clarito);
-        }
-        *, *:before, *:after {
-            box-sizing: inherit; /* box model */
-        }
-        body{
-            font-size: 11px;
-            font-family: 'Krub', sans-serif;
-        }
-        h1{
-            margin-top: 3rem;
-            text-align: center;
-            color: var(--azulMedio);
-            font-size: var(--fuente-h1);
-        }
-        div h2{
-            text-align: center;
-        }
-        .form{
-            text-align: center;
-        }
-        .container {
-            max-width: 600px;
-            min-width: 300px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: var(--fuente-principal);
-        }
-        .ePeso, .eAltura{
-            border: 1.50px solid var(--azulMedio);
-        }  
-        .ePeso{
+	<title>Test de Física Cuántica</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            margin-top: 2rem;
-        }
-        .btnCalcular {
-            background-color: var(--clarito);
-            color: var(--azulMedio);
-            border: 4px solid var(--azulMedio);
-            border-radius: 100px;
-            font-size: 1.60rem;
-            font-weight: 600;
-            text-decoration: none;
-            padding: 17px 95px;
-            transition: all 0.3s ease;
-        }
-        .btnCalcular:hover {
-            background-color: var(--azulMedio);
-            color: white;
-            cursor: pointer;
-        }
-        #resultadoIMC{
-            float: left;
-        }
-        #interpretacionIMC{
-            float: right;
-        }
-        div .outputRes{
-            margin-left: 20.5rem;
-            height: 6rem;
-            width: 14rem;
-            text-align: center;
-            border: 1px solid var(--azulOscuro);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .interpretacion{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 6.15rem;
-            width: 20rem;
-        }
-        #interpretacionIMC div{
-            display: flex;
-            text-align: center;
-            align-items: center;
-            justify-content: center;
-            color: var(--clarito);
-            font-weight: bold;
-            height: 100%;
-            width: 17rem;
-        }
-        .tablaReferencia table {
-            font-size: var(--fuente-principal);
-            width: 95%;
-            height: 25rem;
-            background-color: var(--oscuro);
-            border-spacing: 0;
-            border: 1.50px solid #000;
-        }
-        .tablaReferencia td, .tablaReferencia th {
-            width: 1%;
-            height: 3rem;
-        }
-        .head, .imcs{
-            font-size: var(--fuente-principal);
-            color: white;
-        }
-        .as{
-            border-bottom: 1.50px solid #fff;
-        }
-        .imcs{
-            padding-left: 3rem;
-        }
-        .ff{
-            border-left: 1.50px solid #fff;
-        }
-        .azFte{
-            font-weight: bold;
-            background-color: var(--azulOscuro);
-        }
-        .azCto{
-            font-weight: bold;
-            background-color: var(--azulClaro);
-        }
-        .azMedio{
-            font-weight: bold;
-            background-color: var(--azulMedio);
-        }
-        .blanquillo{
-            color: aquamarine;
-            background-color: #fff;
-        }
-        .head{
-            border-bottom: 2.5px solid #fff;
-        }
-        .edoPeso{
-            font-weight: normal;
-            text-align: center;
-            color: var(--azulOscuro);
-        }
-        .ea{
-            border-bottom: 1.50px solid #000;
-        }
-        .aviso{
-            margin-top: 3rem;
-            width: 95%;
-            height: 5.2rem;
-            margin-left: auto;
-            margin-right: auto;
-            display: flex;
-            justify-content: left;
-            padding-left: 2.5rem;
-            align-items: center;
-            background-color: var(--azulMedio);
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.75rem;
-        }
-        .txts{
-            margin-top: 0.60em;
-            margin-bottom: 0.50rem;
-            margin-left: auto;
-            margin-right: auto;
-            width: 95%;
-            height: 3rem;
-            text-align: center;
-            color: var(--azulMedio);
-            font-size: 18px;
-            font-weight: bold;
-        }
-    </style>
-    <script>
-        function btnCalcularIMC() {
-            let altura = parseFloat(document.getElementById("altura").value);
-            let peso = parseFloat(document.getElementById("peso").value);
-            if (!altura || !peso) {
-                alert('Por favor, ingrese valores en ambos campos.');
-                return;
-            }else{
-                let imc = peso / (altura * altura);
-                document.getElementById("resultadoIMC").innerHTML = imc.toFixed(2);
-                document.getElementById("resultadoIMC").style.fontSize = "2.60rem";
-                // Interpretación del resultado IMC
-                if (imc < 18.5) {
-                document.getElementById("outputInter").innerHTML = "Bajo peso";
-            } else if (imc >= 18.5 && imc <= 24.9) {
-                document.getElementById("outputInter").innerHTML = "Peso normal";
-            } else if (imc >= 25 && imc <= 29.9) {
-                document.getElementById("outputInter").innerHTML = "Sobrepeso";
-            } else if (imc >= 30) {
-                document.getElementById("outputInter").innerHTML = "Obesidad mórbida";
-            }
-        }
-        document.getElementById("outputInter").style.backgroundColor = "rgba(28,192,230,0.11)";
-        document.getElementById("outputInter").style.fontSize = "2.50rem";
-        document.getElementById("outputInter").style.color = "rgb(0,82,155)";
-        }
-    </script>
 </head>
-<body onload="page_load()">
-    <h1>Calculadora de I.M.C.</h1>
-    <div class="container">
-        <div class="form">
-                <label for="altura">Altura:&nbsp&nbsp</label>
-                <input type="text" name="altura" id="altura" class="eAltura" placeholder="Altura en Ms" required>&nbsp&nbsp<b>Metros</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br>
-                <label for="peso">Peso:&nbsp&nbsp&nbsp&nbsp</label>
-                <input type="text" name="peso" id="peso" class="ePeso" placeholder="Peso en Kgs" required>&nbsp&nbsp<b>Kilogramos</b><br><br>
-                <input type="button" class="btnCalcular" value="Calcular IMC" onclick="btnCalcularIMC()"/>
-        </div>
-        <div class="resultado"><br>
-            <h2>Su IMC es:</h2>
-            <div id="resultadoIMC" class="outputRes">
-                <div class="outputRes2">
-                </div>
-            </div>
-            <div id="interpretacionIMC" class="interpretacion">
-                <div id="outputInter" class="respalditos"></div>
-            </div>
-        </div>
-    </div>
-    <br><br>
-    <div class="txts">¿Cómo interpretar los resultados?</div>
-    <div class="tablaReferencia">
-        <table align="center">
-            <tr>
-                <th align="left" class="azFte head as">IMC</th>
-                <th class="azFte head ff">Estado del peso</th>
-            </tr>
-            <tr>
-                <td class="imcs azFte as">Menos de 18.5</td>
-                <td class="blanquillo edoPeso ea">Bajo peso</td>
-            </tr>
-            <tr>
-                <td class="imcs azMedio as">18.5 - 24.9</td>
-                <td class="azCto edoPeso ea">Peso normal</td>
-            </tr>
-            <tr>
-                <td class="imcs azFte as">25.0 - 29.9</td>
-                <td class="blanquillo edoPeso ea">Sobrepeso</td>
-            </tr>
-            <tr>
-                <td class="imcs azMedio">Superior a 30.0</td>
-                <td class="azCto edoPeso">Obesidad mórbida</td>
-            </tr>
-        </table>
-    </div>
-    <div class="aviso">
-        IMC = (El peso en Kilogramos) / (La altura en Metros al cuadrado)
-    </div><br><br><br><br><br>
+<body>
+	<h1>Test de Física Cuántica</h1>
+	<div id="pregunta"></div>
+	<div id="opciones"></div>
+	<button onclick="verificar()">Verificar</button>
+	<div id="resultado"></div>
+    <script>
+        // Definición de preguntas y respuestas
+var preguntas = [
+	{
+		pregunta: "¿Cuál es el nombre del principio que establece que no se puede conocer simultáneamente la posición y el momento de una partícula subatómica?",
+		respuestas: [
+            "A) Ley de Coulomb",
+			"B) Principio de incertidumbre de Heisenberg",
+			"C) Ley de Ohm",
+			"D) Principio de exclusión de Pauli"
+		],
+		correcta: "B"
+	},
+	{
+		pregunta: "¿Qué es el efecto túnel?",
+		respuestas: [
+			"A) El fenómeno por el cual los objetos subatómicos se comportan como ondas y partículas al mismo tiempo",
+			"B) El proceso por el cual un electrón pasa de un nivel de energía a otro emitiendo un fotón",
+			"C) El fenómeno por el cual las partículas subatómicas pueden atravesar barreras de potencial sin tener la energía suficiente para hacerlo",
+			"D) La propiedad por la cual las partículas subatómicas tienen un momento angular intrínseco"
+		],
+		correcta: "C"
+	},
+	{
+		pregunta: "¿Qué es el principio de incertidumbre de Heisenberg?",
+		respuestas: [
+			"A) La imposibilidad de conocer con precisión la posición y el momento de una partícula subatómica al mismo tiempo.",
+			"B) La teoría de que todas las partículas subatómicas están en constante movimiento.",
+			"C) La capacidad de las partículas subatómicas de existir en dos lugares distintos al mismo tiempo.",
+			"D) Ninguna de las anteriores."
+		],
+		correcta: "A"
+	},
+	{
+		pregunta: "¿Qué es la entrelazamiento cuántico?",
+		respuestas: [
+			"A) La capacidad de dos partículas subatómicas de compartir el mismo estado cuántico, incluso si están separadas por grandes distancias.",
+			"B) La teoría de que todas las partículas subatómicas están entrelazadas.",
+			"C) La capacidad de las partículas subatómicas de moverse más rápido que la luz.",
+			"D) Ninguna de las anteriores."
+		],
+		correcta: "A"
+	},
+	{
+		pregunta: "¿Cuál de las siguientes opciones describe correctamente la solución a la conjetura de Birch y Swinnerton-Dyer para todas las curvas elípticas sobre los números racionales?",
+		respuestas: [
+			"A) La conjetura ha sido demostrada para todas las curvas elípticas.",
+			"B) La conjetura ha sido refutada para todas las curvas elípticas.",
+			"C) La conjetura ha sido demostrada para algunas curvas elípticas, pero aún no se sabe si es verdadera para todas.",
+			"D) La conjetura sigue siendo un problema abierto en la teoría de números."
+		],
+		correcta: "D"
+	}
+];
+
+// Variables para llevar el control del progreso del usuario
+var preguntasRespondidas = 0;
+var respuestasCorrectas = 0;
+
+// Función para actualizar las áreas de pregunta y opciones
+function actualizarPregunta() {
+	var preguntaActual = preguntas[preguntasRespondidas];
+	document.getElementById("pregunta").innerHTML = preguntaActual.pregunta;
+	
+	var opcionesHTML = "";
+	for (var i = 0; i < preguntaActual.respuestas.length; i++) {
+		var letra = String.fromCharCode(65 + i); // A, B, C, D
+		var opcion = preguntaActual.respuestas[i];
+		opcionesHTML += '<input type="radio" name="opcion" value="' + letra + '"> ' + opcion + '<br>';
+	}
+	document.getElementById("opciones").innerHTML = opcionesHTML;
+}
+
+// Función para verificar la respuesta del usuario
+function verificar() {
+	var opciones = document.getElementsByName("opcion");
+	var respuestaSeleccionada = null;
+	for (var i = 0; i < opciones.length; i++) {
+		if (opciones[i].checked) {
+			respuestaSeleccionada = opciones[i].value;
+			break;
+		}
+	}
+	if (respuestaSeleccionada === null) {
+		alert("Por favor seleccione una respuesta.");
+		return;
+	}
+    var preguntaActual = preguntas[preguntasRespondidas];
+	if (respuestaSeleccionada === preguntaActual.correcta) {
+		respuestasCorrectas++;
+		document.getElementById("resultado").innerHTML += '<p>Pregunta ' + (preguntasRespondidas+1) + ': CORRECTA</p>';
+	} else {
+		document.getElementById("resultado").innerHTML += '<p>Pregunta ' + (preguntasRespondidas+1) + ': INCORRECTA</p>';
+	}
+	
+	preguntasRespondidas++;
+	
+	if (preguntasRespondidas === preguntas.length) {
+		// El usuario ha respondido todas las preguntas
+		var calificacion = respuestasCorrectas / preguntas.length * 10;
+		document.getElementById("resultado").innerHTML += '<p>Calificación: ' + calificacion.toFixed(1) + '</p>';
+		document.getElementById("pregunta").style.display = "none";
+		document.getElementById("opciones").style.display = "none";
+		document.getElementById("verificar").style.display = "none";
+	} else {
+		actualizarPregunta();
+	}
+}
+// Inicialización del test
+actualizarPregunta(); // Se agrega esta línea para mostrar la primera pregunta
+    </script>
 </body>
 </html>
