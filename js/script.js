@@ -10,7 +10,7 @@ var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes
             var minutos = fechaHoraActual.getMinutes();
             var segundos = fechaHoraActual.getSeconds();
 
-            var horaActual = 'Hoy es ' + diaSemana + ' ' + numDia + ' de ' + mesAnio + ' del ' + anio + ' ' + agregarCero(hora) + ':' + agregarCero(minutos) + ':' + agregarCero(segundos);
+            var horaActual = 'Hoy es ' + diaSemana + ' ' + numDia + ' de ' + mesAnio + ' del ' + anio + ' ' + 'y son las ' + ' ' + agregarCero(hora) + ':' + agregarCero(minutos) + ':' + agregarCero(segundos);
 
             document.getElementById('hora-actual').innerHTML = horaActual;
         }
