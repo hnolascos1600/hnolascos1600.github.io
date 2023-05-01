@@ -4,124 +4,141 @@
 	<title>Test de Física Cuántica</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
 <body>
 	<h1>Test de Física Cuántica</h1>
 	<div id="pregunta"></div>
-	<div id="opciones"></div><br>
-	<button onclick="verificar()">Verificar</button>
+	<div id="opciones"></div>
+	<button onclick="verificar()" id="btnChido">Verificar</button>
 	<div id="resultado"></div>
     <script>
-        // Definición de preguntas y respuestas
-var preguntas = [
-	{
-		pregunta: "¿Cuál es el nombre del principio que establece que no se puede conocer simultáneamente la posición y el momento de una partícula subatómica?",
-		respuestas: [
-            "A) Ley de Coulomb",
-			"B) Principio de incertidumbre de Heisenberg",
-			"C) Ley de Ohm",
-			"D) Principio de exclusión de Pauli"
-		],
-		correcta: "B"
-	},
-	{
-		pregunta: "¿Qué es el efecto túnel?",
-		respuestas: [
-			"A) El fenómeno por el cual los objetos subatómicos se comportan como ondas y partículas al mismo tiempo",
-			"B) El proceso por el cual un electrón pasa de un nivel de energía a otro emitiendo un fotón",
-			"C) El fenómeno por el cual las partículas subatómicas pueden atravesar barreras de potencial sin tener la energía suficiente para hacerlo",
-			"D) La propiedad por la cual las partículas subatómicas tienen un momento angular intrínseco"
-		],
-		correcta: "C"
-	},
-	{
-		pregunta: "¿Qué es el principio de incertidumbre de Heisenberg?",
-		respuestas: [
-			"A) La imposibilidad de conocer con precisión la posición y el momento de una partícula subatómica al mismo tiempo.",
-			"B) La teoría de que todas las partículas subatómicas están en constante movimiento.",
-			"C) La capacidad de las partículas subatómicas de existir en dos lugares distintos al mismo tiempo.",
-			"D) Ninguna de las anteriores."
-		],
-		correcta: "A"
-	},
-	{
-		pregunta: "¿Qué es la entrelazamiento cuántico?",
-		respuestas: [
-			"A) La capacidad de dos partículas subatómicas de compartir el mismo estado cuántico, incluso si están separadas por grandes distancias.",
-			"B) La teoría de que todas las partículas subatómicas están entrelazadas.",
-			"C) La capacidad de las partículas subatómicas de moverse más rápido que la luz.",
-			"D) Ninguna de las anteriores."
-		],
-		correcta: "A"
-	},
-	{
-		pregunta: "¿Cuál de las siguientes opciones describe correctamente la solución a la conjetura de Birch y Swinnerton-Dyer para todas las curvas elípticas sobre los números racionales?",
-		respuestas: [
-			"A) La conjetura ha sido demostrada para todas las curvas elípticas.",
-			"B) La conjetura ha sido refutada para todas las curvas elípticas.",
-			"C) La conjetura ha sido demostrada para algunas curvas elípticas, pero aún no se sabe si es verdadera para todas.",
-			"D) La conjetura sigue siendo un problema abierto en la teoría de números."
-		],
-		correcta: "D"
-	}
-];
-
-// Variables para llevar el control del progreso del usuario
-var preguntasRespondidas = 0;
-var respuestasCorrectas = 0;
-
-// Función para actualizar las áreas de pregunta y opciones
-function actualizarPregunta() {
-	var preguntaActual = preguntas[preguntasRespondidas];
-	document.getElementById("pregunta").innerHTML = preguntaActual.pregunta;
-	
-	var opcionesHTML = "";
-	for (var i = 0; i < preguntaActual.respuestas.length; i++) {
-		var letra = String.fromCharCode(65 + i); // A, B, C, D
-		var opcion = preguntaActual.respuestas[i];
-		opcionesHTML += '<input type="radio" name="opcion" value="' + letra + '"> ' + opcion + '<br>';
-	}
-	document.getElementById("opciones").innerHTML = opcionesHTML;
-}
-
-// Función para verificar la respuesta del usuario
-function verificar() {
-	var opciones = document.getElementsByName("opcion");
-	var respuestaSeleccionada = null;
-	for (var i = 0; i < opciones.length; i++) {
-		if (opciones[i].checked) {
-			respuestaSeleccionada = opciones[i].value;
-			break;
+		let completado;
+		var opcionesRespuesta = [{},{},{},{},{}];
+		let element = document.getElementById('btnChido');
+				// Definición de preguntas y respuestas
+		var preguntas = [
+			{
+				pregunta: "1. ¿Cuál es el nombre del principio que establece que no se puede conocer simultáneamente la posición y el momento de una partícula subatómica?",
+				respuestas: [
+					"A) Ley de Coulomb",
+					"B) Principio de incertidumbre de Heisenberg",
+					"C) Ley de Ohm",
+					"D) Principio de exclusión de Pauli"
+				],
+				correcta: "B"
+			},
+			{
+				pregunta: "2. ¿Qué es el efecto túnel?",
+				respuestas: [
+					"A) El fenómeno por el cual los objetos subatómicos se comportan como ondas y partículas al mismo tiempo",
+					"B) El proceso por el cual un electrón pasa de un nivel de energía a otro emitiendo un fotón",
+					"C) El fenómeno por el cual las partículas subatómicas pueden atravesar barreras de potencial sin tener la energía suficiente para hacerlo",
+					"D) La propiedad por la cual las partículas subatómicas tienen un momento angular intrínseco"
+				],
+				correcta: "C"
+			},
+			{
+				pregunta: "3. ¿Qué es el principio de incertidumbre de Heisenberg?",
+				respuestas: [
+					"A) La imposibilidad de conocer con precisión la posición y el momento de una partícula subatómica al mismo tiempo.",
+					"B) La teoría de que todas las partículas subatómicas están en constante movimiento.",
+					"C) La capacidad de las partículas subatómicas de existir en dos lugares distintos al mismo tiempo.",
+					"D) Ninguna de las anteriores."
+				],
+				correcta: "A"
+			},
+			{
+				pregunta: "4. ¿Qué es la entrelazamiento cuántico?",
+				respuestas: [
+					"A) La capacidad de dos partículas subatómicas de compartir el mismo estado cuántico, incluso si están separadas por grandes distancias.",
+					"B) La teoría de que todas las partículas subatómicas están entrelazadas.",
+					"C) La capacidad de las partículas subatómicas de moverse más rápido que la luz.",
+					"D) Ninguna de las anteriores."
+				],
+				correcta: "A"
+			},
+			{
+				pregunta: "5. ¿Cuál de las siguientes opciones describe correctamente la solución a la conjetura de Birch y Swinnerton-Dyer para todas las curvas elípticas sobre los números racionales?",
+				respuestas: [
+					"A) La conjetura ha sido demostrada para todas las curvas elípticas.",
+					"B) La conjetura ha sido refutada para todas las curvas elípticas.",
+					"C) La conjetura ha sido demostrada para algunas curvas elípticas, pero aún no se sabe si es verdadera para todas.",
+					"D) La conjetura sigue siendo un problema abierto en la teoría de números."
+				],
+				correcta: "D"
+			}
+		];
+		// Vars para llevar el control del progreso del usuario
+		var preguntasRespondidas = 0;
+		var respuestasCorrectas = 0;
+		// Func para actualizar las áreas de pregunta y opciones
+		function actualizarPregunta() {
+			var preguntaActual = preguntas[preguntasRespondidas];
+			document.getElementById("pregunta").innerHTML = preguntaActual.pregunta;
+			
+			var opcionesHTML = "";
+			for (var i = 0; i < preguntaActual.respuestas.length; i++) {
+				var letra = String.fromCharCode(65 + i); // A, B, C, D
+				var opcion = preguntaActual.respuestas[i];
+				opcionesHTML += '<input type="radio" name="opcion" value="' + letra + '"> ' + opcion + '<br>';
+			}
+			document.getElementById("opciones").innerHTML = opcionesHTML;
 		}
-	}
-	if (respuestaSeleccionada === null) {
-		alert("Por favor seleccione una respuesta.");
-		return;
-	}
-    var preguntaActual = preguntas[preguntasRespondidas];
-	if (respuestaSeleccionada === preguntaActual.correcta) {
-		respuestasCorrectas++;
-		document.getElementById("resultado").innerHTML += '<p>Pregunta ' + (preguntasRespondidas+1) + ': CORRECTA</p>';
-	} else {
-		document.getElementById("resultado").innerHTML += '<p>Pregunta ' + (preguntasRespondidas+1) + ': INCORRECTA</p>';
-	}
-	
-	preguntasRespondidas++;
-	
-	if (preguntasRespondidas === preguntas.length) {
-		// El usuario ha respondido todas las preguntas
-		var calificacion = respuestasCorrectas / preguntas.length * 10;
-		document.getElementById("resultado").innerHTML += '<p>Calificación: ' + calificacion.toFixed(1) + '</p>';
-		document.getElementById("pregunta").style.display = "none";
-		document.getElementById("opciones").style.display = "none";
-		document.getElementById("verificar").style.display = "none";
-	} else {
-		actualizarPregunta();
-	}
-}
-// Inicialización del test
-actualizarPregunta(); // Se agrega esta línea para mostrar la primera pregunta
+		// Func p verificar la respuesta que se ingreso
+		function verificar() {
+			var opciones = document.getElementsByName("opcion");
+			var respuestaSeleccionada = null;
+			for (var i = 0; i < opciones.length; i++) {
+				if (opciones[i].checked) {
+					respuestaSeleccionada = opciones[i].value;
+					break;
+				}
+			}
+			if (respuestaSeleccionada === null) {
+				alert("Por favor seleccione una respuesta.");
+				return;
+			}
+			var preguntaActual = preguntas[preguntasRespondidas];
+			if (respuestaSeleccionada === preguntaActual.correcta) {
+				respuestasCorrectas++;
+				opcionesRespuesta[preguntasRespondidas] = '<p><u>Pregunta ' + (preguntasRespondidas+1) + ': CORRECTA</u></p>';
+			} else {
+				opcionesRespuesta[preguntasRespondidas] = '<p><u>Pregunta ' + (preguntasRespondidas+1) + ': INCORRECTA</u></p>';
+			}			
+			preguntasRespondidas++;
+			if (preguntasRespondidas === preguntas.length) {
+				completado = 1;
+				// El usuario ha respondido todas las preguntas
+				var calificacion = respuestasCorrectas / preguntas.length * 10;
+				for (let contador = 0; contador<5; contador++){
+					document.getElementById("resultado").innerHTML += opcionesRespuesta[contador];
+				}
+				document.getElementById("resultado").innerHTML += '<br><p>Calificación: <b>' + calificacion.toFixed(1) + '</b></p>';
+				element.remove();
+				console.log(completado);
+				document.getElementById("pregunta").style.display = "none";
+				document.getElementById("opciones").style.display = "none";
+				//document.getElementById("verificar").style.display = "none";
+			} else {
+				actualizarPregunta();
+			}
+			console.log(completado);
+			if(completado==1){
+				reiniciar();
+			}
+		}
+		// Func para reiniciar el test actualizando la página web (recargar la página)
+		function reiniciar(){
+			const button = document.createElement('button');
+			button.innerText = 'Reiniciar';
+			button.id = 'btnReiniciar';
+			button.addEventListener('click', () => {
+				window.location.reload();
+			});
+			document.body.appendChild(button);
+		}
+		// Inicialización del test
+		actualizarPregunta(); // Se agrega esta línea para mostrar la primera pregunta
     </script>
 </body>
 </html>
