@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function rot13(cad){
+            let res="";
+            for(let i=0; i < cad.length; i++){
+                if(cad.charCodeAt(i) >= "a".charCodeAt(0) && cad.charCodeAt(i) <= "m".charCodeAt(0)){
+                    res += String.fromCharCode(cad.charCodeAt(i) + 13);
+                } else if(cad[i] >= "n" && cad[i] <= "z"){
+                    res += String.fromCharCode(cad.charCodeAt(i) - 13);
+                } else {
+                    res += cad[i];
+                }
+            }
+            return res;
+            
+        }
+        function aEFE(cadena) {
+            const vocales = ['a', 'e', 'i', 'o', 'u'];
+            let resultado = "";
+            
+            for (let i = 0; i < cadena.length; i++) {
+                const caracter = cadena[i].toLowerCase();
+                if (vocales.includes(caracter)) {
+                resultado += caracter + 'f' + caracter;
+                } else {
+                resultado += caracter;
+                }
+            }
+            return resultado;
+        }
+        function limpiar() {
+            document.getElementById("entrada").value = "";
+            document.getElementById("salida").value = "";
+        }
+        function bins(nums) {
+            let numero = parseInt(nums);
+            let num = numero;
+            let binary = [(num % 2)];
+            for (; num > 1;) {
+                num = parseInt(num / 2);
+                binary.push(num % 2);
+            }
+            return binary.reverse().join("");
+        }
+        function convertir() {
+            let entrada = document.getElementById("entrada").value;
+            let selector = document.getElementById("selector");
+            let opcion = selector.options[selector.selectedIndex].value;
+            switch(opcion) {
+                case "1":
+                    document.getElementById("salida").value = bins(entrada);
+                    break;
+                case "2":
+                    document.getElementById("salida").value = aEFE(entrada);
+                    break;
+                case "3":
+                    document.getElementById("salida").value = rot13(entrada);
+                    break;
+                default:
+                    console.log("Opción inválida")
+            }
+        }
+    </script>
+    <style>
+        .origen{
+            height: 35px;
+            width: 700px;
+        }
+        .resultado{
+            margin-top: 20px;
+            height: 35px;
+            width: 700px;
+        }
+        .selector{
+            margin-left: 73px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Convertidor</h1>
+    <div class="origen">
+        Origen:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="entrada" name="datosEntrada" placeholder="Datos aquí">
+    </div>
+    <select id="selector" class="selector" title="selectorOpciones">
+        <option value="1">Decimal a binario</option>
+        <option value="2">A EFE</option>
+        <option value="3">Rotación 13</option>
+    </select>
+    <button onclick="convertir()">Convertir</button>
+    <button onclick="limpiar()">Limpiar</button>
+    <div class="resultado">
+        Resultado: <input type="text" id="salida" name="salida" placeholder="Aquí el resultado" readonly>
+    </div>
+</body>
+</html>
